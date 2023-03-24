@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Compilation de ressources réutilisables dans chaque projet web</p>
+    <ul>
+        <li><a href="">JSON to Html content</a></li>
+    </ul>
+
+    <div id="table"></div>
+
+
+
+    <!-- Router -->
+    <script src="js/Router.js"></script>
+    <script>
+        let router = new Router(); 
+        router.on();
+        
+    </script>
+
+
+    <!-- Json to Table -->
+    <script src="js/JSONtoTABLE.js"></script>
+    <script>
+        let data = [
+            {
+                'id': 1,
+                'name': 'salut',
+                'weight': 23
+            }, 
+            {
+                'id': 2, 
+                'name': 'Bob', 
+                'age': 23
+            }
+        ]; 
+        let jsonToTable = new JSONtoTable(data, document.querySelector('#table')); 
+        // console.log(jsonToTable.render()); 
+
+    </script>
+</body>
+</html>

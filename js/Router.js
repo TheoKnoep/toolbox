@@ -21,7 +21,6 @@ class Router {
 
     route() {
         let route = this.parseHash();  
-        console.log(route); 
 
         // 1st level : 
         switch (route[0]) {
@@ -40,13 +39,13 @@ class Router {
     }
 
     render(content) {
-        console.log(content); 
+        // console.log(content); 
     }
 
     parseHash() {
         let hash = window.location.hash; 
         let route = hash.split('/'); 
-        console.log(route.includes('#')); 
+        // console.log(route.includes('#')); 
         return route.filter(item => item !== '#'); 
     }
 }

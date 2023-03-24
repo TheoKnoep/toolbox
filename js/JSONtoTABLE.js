@@ -3,9 +3,10 @@
  */
 
 class JSONtoTable {
-    constructor(json, wrapper) {
+    constructor(json, wrapper, tag_class) {
         this.data = this.parseJSON(json); 
         this.$wrapper = wrapper; 
+        this.class = tag_class || 'styled-table'; 
     }
 
     parseJSON(stringified_json) {
@@ -29,7 +30,6 @@ class JSONtoTable {
 
         // isolate keys of array of objects : 
         this.data.forEach(item => {
-            console.log(Object.keys(item)); 
             keys.push(Object.keys(item)); 
         })
         keys = keys.flat(); 
@@ -44,15 +44,19 @@ class JSONtoTable {
 
 
         // body table : 
-        let table_body = ''; 
         if (!this.data.length) {
             throw 'Data are no array'; 
         }
-        // this.data.forEach(item => {
-        //     console.log(item); 
-        // })
+        let rows = ''; 
+        this.data.forEach(item => {
+            rows += '<tr>'; 
+            for (let i in keys) {
+                rows += `<td>${item[keys[i]] || ''}</td>`; 
+            }
+            rows += '</tr>'; 
+        }) 
 
-        html_output = `<table>${table_head}${table_body}</table>`; 
+        html_output = `<table class="${this.class}">${table_head}${rows}</table>`; 
         this.$wrapper.innerHTML = html_output; 
         return html_output; 
     }

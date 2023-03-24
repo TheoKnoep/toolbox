@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <link rel="stylesheet" href="css/table.css" type="text/css">
 </head>
 <body>
     <p>Compilation de ressources réutilisables dans chaque projet web</p>
@@ -21,27 +23,34 @@
     <script>
         let router = new Router(); 
         router.on();
-        
     </script>
 
 
     <!-- Json to Table -->
-    <script src="js/JSONtoTABLE.js"></script>
+    <script src="js/JSONtoTable.js"></script>
     <script>
+        const table_wrapper = document.querySelector('#table')
         let data = [
             {
                 'id': 1,
-                'name': 'salut',
-                'weight': 23
+                'name': 'Al',
+                'weight': '53kg'
             }, 
             {
                 'id': 2, 
                 'name': 'Bob', 
-                'age': 23
+                'age': 23, 
+                'weight': '76 kg'
+            }, 
+            { 
+                'id': 3, 
+                'name': 'Jak', 
+                'age': 45, 
+                'email': 'jak@horner.com'
             }
         ]; 
-        let jsonToTable = new JSONtoTable(data, document.querySelector('#table')); 
-        // console.log(jsonToTable.render()); 
+        let jsonToTable = new JSONtoTable(data, table_wrapper); 
+        jsonToTable.render(); 
 
     </script>
 </body>

@@ -3,10 +3,8 @@
  */
 
 class JSONtoTable {
-    constructor(json, wrapper, tag_class) {
+    constructor(json) {
         this.data = this.parseJSON(json); 
-        this.$wrapper = wrapper; 
-        this.class = tag_class || 'styled-table'; 
     }
 
     parseJSON(stringified_json) {
@@ -23,7 +21,7 @@ class JSONtoTable {
         }
     }
 
-    render() {
+    render($wrapper, tag_class = 'styled-table') {
         let html_output = ''; 
 
         let keys = []; 
@@ -56,8 +54,53 @@ class JSONtoTable {
             rows += '</tr>'; 
         }) 
 
-        html_output = `<table class="${this.class}">${table_head}${rows}</table>`; 
-        this.$wrapper.innerHTML = html_output; 
+        html_output = `<table class="${tag_class}">${table_head}${rows}</table>`; 
+        $wrapper.innerHTML = html_output; 
         return html_output; 
     }
 }
+
+
+
+class TableToJSON {
+    constructor(htmlTable) {
+        this.html = htmlTable; 
+    }
+
+    parse(htmlTable = this.html) {
+        let output = []; 
+        let dom = new DOMParser().parseFromString(htmlTable, "text/html");  
+        let htmlTableParsed = dom.querySelector('table'); 
+        let head = htmlTableParsed.querySelectorAll('th'); 
+        let keys = []; 
+        head.forEach(node => {
+            keys.push(node.textContent); 
+        })
+
+        let numberOfRaws = htmlTableParsed.querySelectorAll('table tr').length-1; 
+        let allHtmlRaws = htmlTableParsed.querySelectorAll('table tr'); 
+        for (let i = 1; i <= numberOfRaws; i++) {
+            let json_raw = {}; 
+            allHtmlRaws[i].querySelectorAll('td').forEach((node, index) => {
+                json_raw[keys[index]] = this.typeParser(node.textContent); 
+            })
+            output.push(json_raw);  
+        }
+        return output; 
+    }
+
+
+    typeParser(input) {
+        if (input === '') {
+            return null; 
+        }
+        if (isNaN(input*1)) {
+            return input;  
+        } else {
+            return input*1; 
+        }
+    }
+}
+
+
+

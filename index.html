@@ -30,28 +30,19 @@
     <script src="js/JSONtoTable.js"></script>
     <script>
         const table_wrapper = document.querySelector('#table')
-        let data = [
-            {
-                'id': 1,
-                'name': 'Al',
-                'weight': '53kg'
-            }, 
-            {
-                'id': 2, 
-                'name': 'Bob', 
-                'age': 23, 
-                'weight': '76 kg'
-            }, 
-            { 
-                'id': 3, 
-                'name': 'Jak', 
-                'age': 45, 
-                'email': 'jak@horner.com'
-            }
-        ]; 
-        let jsonToTable = new JSONtoTable(data, table_wrapper); 
-        jsonToTable.render(); 
+        let data = '[{"id":1,"name":"Al","weight":"53kg"},{"id":2,"name":"Bob","age":23,"weight":"76 kg"},{"id":3,"name":"Jak","age":45,"email":"jak@email.com","random":"blablabl"}]'; 
+        let jsonToTable = new JSONtoTable(data); 
+        jsonToTable.render(table_wrapper); 
 
+        const htmlTable = '<table class="styled-table"><tbody><tr><th>id</th><th>name</th><th>weight</th><th>age</th><th>email</th><th>random</th></tr><tr><td>1</td><td>Al</td><td>53kg</td><td></td><td></td><td></td></tr><tr><td>2</td><td>Bob</td><td>76 kg</td><td>23</td><td></td><td></td></tr><tr><td>3</td><td>Jak</td><td></td><td>45</td><td>jak@email.com</td><td>blablabl</td></tr></tbody></table>';
+        let tableParser = new TableToJSON(htmlTable); 
+        let json_object = tableParser.parse();  
+        console.log("html table conevrted in json : ", json_object); 
+        
+
+        tableParser.typeParser(1); 
+        tableParser.typeParser('1'); 
+        tableParser.typeParser('allo'); 
     </script>
 </body>
 </html>

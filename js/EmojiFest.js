@@ -14,7 +14,6 @@ class EmojiFest {
             size: options ? options.size || '32px' : '32px'
         }; 
         this.zIndex = 1000; 
-
         
     }
 
@@ -27,11 +26,21 @@ class EmojiFest {
             document.querySelectorAll('.emoji-fest').forEach(emoji => emoji.remove()); 
         })
         window.addEventListener('mousemove', event => {
-            console.log(event); 
-            console.log(event.x, event.y); 
-            console.log(event.clientX, event.clientY); 
+            // console.log(event); 
+            // console.log(event.x, event.y); 
+            // console.log(event.clientX, event.clientY); 
             this.displayEmoji(event.clientX, event.clientY); 
-        })
+        }, true)
+    }
+
+    /** ... TO DO  */
+    off() { // fails
+        window.removeEventListener('mousemove', event => {
+            // console.log(event); 
+            // console.log(event.x, event.y); 
+            // console.log(event.clientX, event.clientY); 
+            this.displayEmoji(event.clientX, event.clientY); 
+        }, true)
     }
 
     displayEmoji(x, y) {

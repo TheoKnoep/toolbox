@@ -22,8 +22,12 @@ class JSONtoTable {
     }
 
     render($wrapper, tag_class = 'styled-table') {
-        let html_output = ''; 
+        let html_output = this.getHTML(tag_class); 
+        $wrapper.innerHTML = html_output; 
+        return html_output; 
+    }
 
+    getHTML(tag_class = 'styled-table') {
         let keys = []; 
 
         // isolate keys of array of objects : 
@@ -40,7 +44,6 @@ class JSONtoTable {
         })
         let table_head = `<tr>${th}</tr>`; 
 
-
         // body table : 
         if (!this.data.length) {
             throw 'Data are no array'; 
@@ -54,9 +57,7 @@ class JSONtoTable {
             rows += '</tr>'; 
         }) 
 
-        html_output = `<table class="${tag_class}">${table_head}${rows}</table>`; 
-        $wrapper.innerHTML = html_output; 
-        return html_output; 
+        return `<table class="${tag_class}">${table_head}${rows}</table>`; 
     }
 }
 
